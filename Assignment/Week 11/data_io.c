@@ -1,40 +1,50 @@
 #include <stdio.h>
-void insertionSort(int [], int, FILE *);
-
+#include <stdlib.h>
+void selectionSort(int[], int, FILE *);
 int main()
 {
-    FILE *in, *out;
+    FILE *in = NULL, *out = NULL;
     int ar[99999], i, k, n = 0;
     in = fopen("input.txt", "r");
     out = fopen("output.txt", "w");
-
+    if ((in == NULL) || (out == NULL))
+    {
+        printf("Failed to open the file.\n");
+        exit(1);
+    }
     while (fscanf(in, "%d", &i) != EOF)
     {
         ar[n] = i;
         n++;
     }
 
-    insertionSort(ar, n, out);
+    selectionSort(ar, n, out);
 
     fclose(in);
     fclose(out);
     return 0;
 }
-void insertionSort(int arr[], int size, FILE *output)
+void selectionSort(int ar[], int size, FILE *output)
 {
-    int i, j,k, key;
-
-    for (i = 1; i < size; i++)
+    int i, j, k, min, tmp;
+    for (i = 0; i < size - 1; i++)
     {
-        key = arr[i];
-        j = i - 1;
-        while (j >= 0 && arr[j] > key)
+        min = i;
+        for (j = i + 1; j < size; j++)
         {
-            arr[j + 1] = arr[j];
-            j--;
+            if (ar[j] < ar[min])
+                min = j;
         }
-        arr[j + 1] = key;
-        for(k=0;k<size;k++) fprintf(output, "%d ", arr[k]);
+        if (i != min)
+        {
+            tmp = ar[i];
+            ar[i] = ar[min];
+            ar[min] = tmp;
+        }
+        if (i == size - 2)
+            fprintf(output, "final result:\n");
+        for (k = 0; k < size; k++)
+            fprintf(output, "%d ", ar[k]);
         fprintf(output, "\n");
     }
 }
