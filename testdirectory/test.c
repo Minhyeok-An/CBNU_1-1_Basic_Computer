@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 void InsertSort(int, int[]);
 
-int main(int argc, char *argv[])
+int main(int argc, const char *argv[])
 {
     FILE *in = NULL, *out = NULL;
     int ar[99999], i, n = 0;
-    in = fopen(argv[0], "r");
-    out = fopen(argv[1], "w");
+    in = fopen(argv[1], "r");
+    out = fopen(argv[2], "w");
     if ((in == NULL) || (out == NULL))
     {
         printf("Failed to open the file.\n");

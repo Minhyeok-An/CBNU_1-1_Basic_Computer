@@ -6,8 +6,8 @@ int main(int argc, char *argv[])
 {
     FILE *in = NULL, *out = NULL;
     int ar[99999], i, n = 0;
-    in = fopen(argv[0], "r");
-    out = fopen(argv[1], "w");
+    in = fopen(argv[1], "r");
+    out = fopen(argv[2], "w");
     if ((in == NULL) || (out == NULL))
     {
         printf("Failed to open the file.\n");
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     }
     InsertSort(n, ar);
     for (i = 0; i < n; i++)
-        printf("%d ", ar[i]);
+        fprintf(out, "%d ", ar[i]);
 
     fclose(in);
     fclose(out);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 void InsertSort(int N, int a[])
 {
     int i, j;
-    char key;
+    int key;
     for (j = 1; j < N; j++)
     {
         key = a[j];
