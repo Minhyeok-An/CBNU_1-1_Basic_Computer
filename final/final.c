@@ -206,6 +206,10 @@ int no5() {
 		printf("\n");
 	}
 }
+int test(){
+	printf("Hello World!");
+	return 0;
+}
 int main() {
 	no5();
 	return 0;
